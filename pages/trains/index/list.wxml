@@ -1,9 +1,12 @@
 <!--pages/trains/index/list.wxml-->
-<view class='container'>
+<view class='index-bd'>
   <block wx:for-items="{{list}}" wx:key="{{item.id}}">
-  <navigator url='{{item.path}}'>
-    <view class='train-list-item'>{{item.name}}</view>
-  </navigator>
-  
+    <navigator url='{{item.path}}'>
+      <view class='list-item'>
+        <view class='list-text'>{{item.name}}</view>
+        <image class='list-img' src='{{item.img}}'/>
+      </view>
+    </navigator>
+
   </block>
 </view>

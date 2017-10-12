@@ -1,16 +1,36 @@
 <!--pages/trains/pkp/rememberpk.wxml-->
 <view class='container'>
-  <scroll-view wx:if="{{isCheck}}" class='scroll-view_H' scroll-x="true" style="width: 100%">
-    <block wx:for="{{pkp}}" wx:key="{{item}}">
+  <scroll-view wx:if="{{state==0}}" class='scroll-view_H' scroll-x="true" style="width: 100%">
+    <block wx:for="{{ipk}}" wx:key="{{item}}">
+      <image class='scroll-view-item_H' src='{{pk_b}}' />
+    </block>
+  </scroll-view>
+
+  <scroll-view wx:if='{{state==1}}' class='scroll-view_H' scroll-x="true" style="width: 100%">
+    <block wx:for="{{rpk}}" wx:key="{{item}}">
+      <image class='scroll-view-item_H' src='{{item}}' />
+    </block>
+  </scroll-view>
+
+  <scroll-view wx:if='{{state==2}}' class='scroll-view_H' scroll-x="true" style="width: 100%">
+    <block wx:for="{{cpk}}" wx:key="{{item}}">
       <image class='scroll-view-item_H' src='{{item}}' id='{{item}}' bindtap='clickPkp' />
     </block>
   </scroll-view>
-  <scroll-view wx:if='{{isShow}}' class='scroll-view_H' scroll-x="true" style="width: 100%">
-    <block wx:for="{{rpk}}" wx:key="{{item}}">
-      <image class='scroll-view-item_H' src='{{item}}' id='{{item}}' />
+
+  <scroll-view wx:if="{{state==3}}" class='scroll-view_H' scroll-x="true" style="width: 100%">
+    <block wx:for="{{ipk}}" wx:key="{{item}}" wx:for-index="i">
+      <view class='content'>
+        <image class='conitem' src='{{cpk[i]}}' />
+        <image class='conitem' src='{{rpk[i]}}' />
+      </view>
     </block>
   </scroll-view>
-  <button bindtap='startCheck'>{{isCheck? "复原好了":"记好了"}}</button>
-  <view wx:if='{{isCheck}}'>{{isShow ? "一共 "+pkp.length+" 张牌，记错了 "+errorCount+" 个":"点击某张扑克牌将其后移进行排序"}}</view>
+
+  <button bindtap='clickBtn'>{{btnMsg[state]}}</button>
+  <view wx:if='{{state==0}}'>挑战多少张扑克牌</view>
+  <slider wx:if='{{state==0}}' bindchange="slider4change" min="12" max="54" value='54' show-value style='width: 400rpx'/>
+  <view wx:if='{{state>=2}}'>{{"用时："+useTime}}</view>
+  <view wx:if='{{state>=2}}'>{{state==3 ? "一共 "+length+" 张牌，记错了 "+errorCount+" 个。" : "点击某张扑克牌将其后移进行排序"}}</view>
 
 </view>

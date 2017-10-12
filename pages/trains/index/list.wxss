@@ -1,7 +1,29 @@
 /* pages/trains/index/list.wxss */
-.train-list-item {
+.index-bd {
+  padding: 0 30rpx 40rpx;
+}
+
+.list-item {
   margin: 20rpx 0;
-  background-color: #FFFFFF;
+  background-color: #fff;
   border-radius: 4rpx;
   overflow: hidden;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  transition: opacity .3s;
+}
+
+.list-text{
+  flex: 1;
+}
+.list-img {
+  width: 60rpx;
+  height: 60rpx;
+}
+.list-item-hd {
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  transition: opacity .3s;
 }

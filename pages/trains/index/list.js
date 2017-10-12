@@ -9,7 +9,8 @@ Page({
       {
         id: 'puke',
         name: '记忆扑克牌',
-        path: '../pkp/rememberpk'
+        path: '../pkp/rememberpk',
+        img: '../pkp/res/pkp_item.png'
       }
     ]
   },

@@ -21,77 +21,140 @@ Page({
       'res/_13_a.png', 'res/_13_b.png', 'res/_13_c.png', 'res/_13_d.png',
       'res/_k_a.png', 'res/_k_b.png'
     ],
+    ipk: Array,
+    cpk: Array,
     rpk: Array,
     pk_b: 'res/_pkp.png',
-    isCheck: false,
-    isShow: true,
+    length: 54,
     errorCount: 0,
     state: 0,
+    btnMsg: ['开始', '记好了', '检查', '再来一遍'],
+    startTime: 0,
+    endTime: 0,
+    useTime: ""
   },
 
   /**
    * 点击扑克牌
    */
   clickPkp: function (event) {
-    if (this.data.isCheck) {
+    if (this.data.state == 2) {
       // console.log("点击了："+event.target.id)
-      var i = this.data.pkp.indexOf(event.target.id)
-      if (i > -1 && i < this.data.pkp.length - 1) {
-        var temp = this.data.pkp[i + 1]
+      var i = this.data.cpk.indexOf(event.target.id)
+      if (i > -1 && i < this.data.cpk.length - 1) {
+        var temp = this.data.cpk[i + 1]
         // console.log("位置："+i)
         // console.log("要交换的是：" + temp+" 位置在:"+(i+1))
-        this.data.pkp[i + 1] = event.target.id
-        this.data.pkp[i] = temp
+        this.data.cpk[i + 1] = event.target.id
+        this.data.cpk[i] = temp
         this.setData({
-          pkp: this.data.pkp
+          cpk: this.data.cpk
         })
       }
     }
   },
 
   /**
-   * 开始复牌
+   * 点击按钮
    */
-  startCheck: function (event) {
-    if(this.data.isCheck){
-      var count=0
-      for (var i=0;i<this.data.pkp.length;i++){
-        if (this.data.pkp[i]!=this.data.rpk[i]){
-          ++count
+  clickBtn: function (event) {
+    var st = this.data.state
+    var start = this.data.startTime
+    var end = this.data.endTime
+    var list = Array.apply(null, { length: this.data.length })
+    var listCpk = Array.apply(null, { length: this.data.length })
+    var count = 0
+    var timeMsg = this.data.useTime
+
+    switch (this.data.state) {
+      case 0:
+        start = Date.now()
+        for (var i = 0; i < this.data.length; i++) {
+          var j = Math.floor(Math.random() * this.data.length)
+          var pk = this.data.ipk[j]
+          while (list.indexOf(pk) > -1) {
+            j = Math.floor(Math.random() * this.data.length)
+            pk = this.data.ipk[j]
+          }
+          list[i] = pk
+          listCpk[i] = this.data.ipk[i]
         }
-      }
+        break;
+      case 1:
+        end = Date.now()
+        var s = Math.floor((end - start) / 1000)
+        var m = Math.floor(s / 60)
+        var h = Math.floor(m / 60)
+        console.log("h:" + h + " m:" + m + " s:" + s)
+        timeMsg = ""
+        if (h > 0) {
+          timeMsg = timeMsg + h + " H"
+          m = m % 60
+        }
+        if (m > 0) {
+          timeMsg = timeMsg + m + " m"
+          s = s % 60
+        }
+        if (s > 0) {
+          timeMsg = timeMsg + s + "s"
+        }
+
+        break;
+      case 2:
+        for (var i = 0; i < this.data.cpk.length; i++) {
+          if (this.data.cpk[i] != this.data.rpk[i]) {
+            ++count
+          }
+        }
+        break;
+      case 3:
+        break;
+    }
+    ++st
+    if (st == 4) {
+      st = 0
+    }
+    if (this.data.state == 0) {
       this.setData({
-        isShow: true,
-        errorCount: count
+        rpk: list,
+        cpk: listCpk,
+        state: st,
+        startTime: start
       })
-    }else{
+    } else {
       this.setData({
-        isCheck: true,
-        isShow: false
+        state: st,
+        endTime: end,
+        errorCount: count,
+        useTime: timeMsg
       })
     }
-    
+  },
+
+  slider4change:function(e){
+    if(this.data.length != e.detail.value){
+      var list = Array.apply(null, { length: e.detail.value })
+      for (var i = 0; i < e.detail.value; i++) {
+        list[i] = this.data.pkp[i]
+      }
+      this.setData({
+        ipk: list,
+        length: e.detail.value
+      })
+    }    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var list = Array.apply(null, { length: this.data.pkp.length })
-    for (var i = 0; i < this.data.pkp.length; i++) {
-      var j = Math.floor(Math.random() * this.data.pkp.length)
-      var pk = this.data.pkp[j]
-      while (list.indexOf(pk) > -1) {
-        j = Math.floor(Math.random() * this.data.pkp.length)
-        pk = this.data.pkp[j]
-      }
-      list[i] = pk
+    var list = Array.apply(null, { length: this.data.length })
+    for (var i = 0; i < this.data.length; i++) {
+      list[i] = this.data.pkp[i]
     }
     this.setData({
-      rpk: list
+      ipk: list
     })
-    // console.log(this.data.pkp)
-    // console.log(this.data.rpk)
   },
 
   /**

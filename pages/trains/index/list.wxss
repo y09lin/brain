@@ -1,0 +1,7 @@
+/* pages/trains/index/list.wxss */
+.train-list-item {
+  margin: 20rpx 0;
+  background-color: #FFFFFF;
+  border-radius: 4rpx;
+  overflow: hidden;
+}

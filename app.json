@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/trains/index/list",
+    "pages/trains/pkp/rememberpk"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Training",
+    "navigationBarTextStyle": "black"
+  }
+}

@@ -1,0 +1,9 @@
+<!--pages/trains/index/list.wxml-->
+<view class='container'>
+  <block wx:for-items="{{list}}" wx:key="{{item.id}}">
+  <navigator url='{{item.path}}'>
+    <view class='train-list-item'>{{item.name}}</view>
+  </navigator>
+  
+  </block>
+</view>

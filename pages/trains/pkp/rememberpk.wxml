@@ -1,0 +1,16 @@
+<!--pages/trains/pkp/rememberpk.wxml-->
+<view class='container'>
+  <scroll-view wx:if="{{isCheck}}" class='scroll-view_H' scroll-x="true" style="width: 100%">
+    <block wx:for="{{pkp}}" wx:key="{{item}}">
+      <image class='scroll-view-item_H' src='{{item}}' id='{{item}}' bindtap='clickPkp' />
+    </block>
+  </scroll-view>
+  <scroll-view wx:if='{{isShow}}' class='scroll-view_H' scroll-x="true" style="width: 100%">
+    <block wx:for="{{rpk}}" wx:key="{{item}}">
+      <image class='scroll-view-item_H' src='{{item}}' id='{{item}}' />
+    </block>
+  </scroll-view>
+  <button bindtap='startCheck'>{{isCheck? "复原好了":"记好了"}}</button>
+  <view wx:if='{{isCheck}}'>{{isShow ? "一共 "+pkp.length+" 张牌，记错了 "+errorCount+" 个":"点击某张扑克牌将其后移进行排序"}}</view>
+
+</view>

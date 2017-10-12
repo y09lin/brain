@@ -1,0 +1,40 @@
+/* pages/trains/pkp/rememberpk.wxss */
+
+.page-section {
+  align-items: center;
+  display: block;
+  width: 100%;
+  height: 300rpx;
+}
+
+.swiper {
+  height: 300rpx;
+}
+
+.swiper-item image {
+  width: 100%;
+  height: 100%;
+}
+
+.scroll-view-item_H{
+  display: inline-block;
+  width: 250rpx;
+  height: 300rpx;
+}
+
+.scroll-view_H{
+  white-space: nowrap;
+  
+  
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 10px;
+  background: #cce8cf;
+} 

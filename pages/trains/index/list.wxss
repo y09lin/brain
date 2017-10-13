@@ -6,7 +6,7 @@
 .list-item {
   margin: 20rpx 0;
   background-color: #fff;
-  border-radius: 4rpx;
+  border-radius: 20rpx;
   overflow: hidden;
   padding: 30rpx;
   display: flex;

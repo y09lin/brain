@@ -7,6 +7,5 @@
         <image class='list-img' src='{{item.img}}'/>
       </view>
     </navigator>
-
   </block>
 </view>

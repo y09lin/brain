@@ -16,6 +16,11 @@ Page({
       url:'../trains/index/list'
     })
   },
+  test:function(){
+    wx.navigateTo({
+      url: '../test/test',
+    })
+  },
   onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({

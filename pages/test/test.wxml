@@ -1,0 +1,4 @@
+<!--pages/test/test.wxml-->
+<view>
+<rich-text nodes="{{ally}}" />
+</view>

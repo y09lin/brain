@@ -5,14 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'puke',
-        name: '记忆扑克牌',
-        path: '../pkp/rememberpk',
-        img: '../pkp/res/pkp_item.png'
-      }
-    ]
+    list: [{
+      id: 'puke',
+      name: '记忆扑克牌',
+      path: '../pkp/rememberpk',
+      img: '../pkp/res/pkp_item.png'
+    }, {
+      id: 'pi',
+      name: '挑战圆周率',
+      path: '../pi/pi',
+      img: '../pkp/res/pkp_item.png'
+    }]
   },
 
   /**

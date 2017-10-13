@@ -3,13 +3,14 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/trains/index/list",
-    "pages/trains/pkp/rememberpk"
+    "pages/trains/pkp/rememberpk",
+    "pages/test/test",
+    "pages/trains/pi/pi"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#cce8cf",
     "navigationBarTitleText": "Training",
-    "navigationBarTextStyle": "black",
-    "backgroundColor": "#cce8cf"
+    "navigationBarTextStyle": "black"
   }
 }

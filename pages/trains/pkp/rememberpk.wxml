@@ -22,21 +22,22 @@
     <block wx:for="{{ipk}}" wx:key="{{item}}" wx:for-index="i">
       <view class='content-pkp'>
         <image class='conitem' src='{{item}}' id='{{i}}' bindtap='addOrChangePkp' />
-        <view class='context-red' id='{{i}}' bindtap='addOrChangePkp'>{{i+1}}</view>
+        <view class='context' id='{{i}}' bindtap='addOrChangePkp'>{{i+1}}</view>
       </view>
     </block>
   </scroll-view>
+  
   <scroll-view wx:if='{{state==2}}' class='scroll-view_H' scroll-x="true" style="width: 100%">
     <block wx:for="{{cpk}}" wx:key="{{item}}" wx:for-index="i">
       <view class='content-pkp'>
-        <image class='conitem' src='{{item}}' id='{{i}}' bindtap='actPkp' />
+        <image class='conitem' src='{{item}}' id='{{i}}' bindtap='actPkp'/>
         <view class='context' id='{{i}}' bindtap='actTxt'>{{i+1}}</view>
       </view>
     </block>
   </scroll-view>
 
   <scroll-view wx:if="{{state==3}}" class='scroll-view_H' scroll-x="true" style="width: 100%">
-    <block wx:for="{{ipk}}" wx:key="{{item}}" wx:for-index="i">
+    <block wx:for="{{rpk}}" wx:key="{{item}}" wx:for-index="i">
       <view class='content'>
         <image class='conitem' src='{{rpk[i]}}' />
         <image class='conitem' src='{{cpk[i]}}' />

@@ -43,11 +43,6 @@ Page({
     if (flag == -1) {
       clist.push(ilist[i])
       ilist.splice(i, 1)
-    } else {
-      var temp = ilist[i]
-      ilist[i] = clist[flag]
-      clist[flag] = temp
-      flag = -1
     }
     this.setData({
       ipk: ilist,
@@ -56,68 +51,23 @@ Page({
     })
   },
 
+  // removePkp: function(e){
+  // },
+
   //点击复原cpk
-  actPkp: function (e) {
-    var flag = this.data.index
-    if (flag == -1) {
-      flag = e.target.id
-      this.setData({
-        index: flag
-      })
-    } else {
-      var i = e.target.id
-      if (flag == i) {
-        flag = -1
-        this.setData({
-          index: flag
-        })
-      } else {
-        var clist = this.data.cpk
-        var temp = clist[i]
-        clist[i] = clist[flag]
-        clist[flag] = temp
-        flag = -1
-        this.setData({
-          index: flag,
-          cpk: clist
-        })
-      }
-    }
+  actPkp: function (e) {    
   },
   //点击复原txt
   actTxt: function (e) {
-    var flag = this.data.index
-    if (flag == -1) {
-      flag = e.target.id
-      this.setData({
-        index: flag
-      })
-    } else {
-      var i = e.target.id
-      if (flag == i) {
-        var clist = this.data.cpk
-        var ilist = this.data.ipk
-        var temp = clist[i]
-        ilist.push(temp)
-        clist.splice(i, 1)
-        flag = -1
-        this.setData({
-          index: flag,
-          cpk: clist,
-          ipk: ilist
-        })
-      } else {
-        var clist = this.data.cpk
-        var temp = clist[i]
-        clist[i] = clist[flag]
-        clist[flag] = temp
-        flag = -1
-        this.setData({
-          index: flag,
-          cpk: clist
-        })
-      }
-    }
+    var ilist = this.data.ipk
+    var clist = this.data.cpk
+    var i = e.target.id
+    ilist.push(clist[i])
+    clist.splice(i, 1)
+    this.setData({
+      ipk: ilist,
+      cpk: clist
+    })
   },
 
   /**

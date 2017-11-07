@@ -19,14 +19,50 @@
   padding: 10px;
 }
 
-.content{ 
+.content {
   display: inline-block;
   width: 250rpx;
-  height: 600rpx; 
+  height: 600rpx;
 }
 
-.conitem{
+.conitem {
   display: block;
   width: 250rpx;
   height: 300rpx;
+}
+
+.content-pkp {
+  display: inline-block;
+  width: 250rpx;
+  height: 400rpx;
+}
+
+.context {
+  display: block;
+  width: 250rpx;
+  height: 80rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  text-align: center;
+  border-style: ridge;
+}
+
+.context-red {
+  display: block;
+  width: 250rpx;
+  height: 100rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  text-align: center;
+  border-style: ridge;
+  background-color: red;
+}
+
+.context-blue {
+  display: block;
+  width: 250rpx;
+  height: 60rpx;
+  padding: 10px;
+  text-align: center;
+  background-color: blue;
 }

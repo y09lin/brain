@@ -9,9 +9,10 @@
 }
 
 .inputText{
-  line-height: 30rpx;
-  letter-spacing:15px;
-  height:600rpx;
+  height:360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .row-btn {

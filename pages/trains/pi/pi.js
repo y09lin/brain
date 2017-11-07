@@ -18,7 +18,10 @@ Page({
   },
 
   clickBtn: function (e) {
-    var nodes = this.data.writePi
+    var nodes = []
+    if (this.data.writePi.length > 0) {
+      nodes = this.data.writePi[0].children
+    }
     var str = this.data.writeStr
     var c = this.data.pi[str.length]
     var writec = e.target.id
@@ -33,14 +36,14 @@ Page({
       // 提示，如果当前位是错的，则提示当前位，else 提示下一位
       var lastc = str[str.length - 1]
       var lastpi = this.data.pi[str.length - 1]
-      if(str.length==0){
-        lastc=''
+      if (str.length == 0) {
+        lastc = ''
         lastpi = this.data.pi[0]
-      }else{
+      } else {
         lastc = str[str.length - 1]
         lastpi = this.data.pi[str.length - 1]
       }
-      
+
       if (lastc == lastpi) {
         var lastspan = {
           name: 'span',
@@ -83,8 +86,16 @@ Page({
         nodes.push({ name: 'br' })
       }
     }
+    var nodeParen = [{
+      name: 'div',
+      attrs: {
+        style: 'width:300px;height:60px;'
+      },
+      children: nodes
+    }]
+
     this.setData({
-      writePi: nodes,
+      writePi: nodeParen,
       writeStr: str
     })
   },

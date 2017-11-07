@@ -25,13 +25,99 @@ Page({
     cpk: Array,
     rpk: Array,
     pk_b: 'res/_pkp.png',
-    length: 54,
+    length: 12,
+    index: -1,
     errorCount: 0,
     state: 0,
     btnMsg: ['开始', '记好了', '检查', '再来一遍'],
     startTime: 0,
     endTime: 0,
     useTime: ""
+  },
+  // 点击原始ikp，
+  addOrChangePkp: function (e) {
+    var ilist = this.data.ipk
+    var clist = this.data.cpk
+    var i = e.target.id
+    var flag = this.data.index
+    if (flag == -1) {
+      clist.push(ilist[i])
+      ilist.splice(i, 1)
+    } else {
+      var temp = ilist[i]
+      ilist[i] = clist[flag]
+      clist[flag] = temp
+      flag = -1
+    }
+    this.setData({
+      ipk: ilist,
+      cpk: clist,
+      index: flag
+    })
+  },
+
+  //点击复原cpk
+  actPkp: function (e) {
+    var flag = this.data.index
+    if (flag == -1) {
+      flag = e.target.id
+      this.setData({
+        index: flag
+      })
+    } else {
+      var i = e.target.id
+      if (flag == i) {
+        flag = -1
+        this.setData({
+          index: flag
+        })
+      } else {
+        var clist = this.data.cpk
+        var temp = clist[i]
+        clist[i] = clist[flag]
+        clist[flag] = temp
+        flag = -1
+        this.setData({
+          index: flag,
+          cpk: clist
+        })
+      }
+    }
+  },
+  //点击复原txt
+  actTxt: function (e) {
+    var flag = this.data.index
+    if (flag == -1) {
+      flag = e.target.id
+      this.setData({
+        index: flag
+      })
+    } else {
+      var i = e.target.id
+      if (flag == i) {
+        var clist = this.data.cpk
+        var ilist = this.data.ipk
+        var temp = clist[i]
+        ilist.push(temp)
+        clist.splice(i, 1)
+        flag = -1
+        this.setData({
+          index: flag,
+          cpk: clist,
+          ipk: ilist
+        })
+      } else {
+        var clist = this.data.cpk
+        var temp = clist[i]
+        clist[i] = clist[flag]
+        clist[flag] = temp
+        flag = -1
+        this.setData({
+          index: flag,
+          cpk: clist
+        })
+      }
+    }
   },
 
   /**
@@ -62,7 +148,8 @@ Page({
     var start = this.data.startTime
     var end = this.data.endTime
     var list = Array.apply(null, { length: this.data.length })
-    var listCpk = Array.apply(null, { length: this.data.length })
+    // var listCpk = Array.apply(null, { length: this.data.length })
+
     var count = 0
     var timeMsg = this.data.useTime
 
@@ -77,7 +164,7 @@ Page({
             pk = this.data.ipk[j]
           }
           list[i] = pk
-          listCpk[i] = this.data.ipk[i]
+          // listCpk[i] = this.data.ipk[i]
         }
         break;
       case 1:
@@ -106,6 +193,7 @@ Page({
             ++count
           }
         }
+        // TODO cpk.length<length
         break;
       case 3:
         break;
@@ -117,7 +205,7 @@ Page({
     if (this.data.state == 0) {
       this.setData({
         rpk: list,
-        cpk: listCpk,
+        cpk: [],
         state: st,
         startTime: start
       })
@@ -131,8 +219,8 @@ Page({
     }
   },
 
-  slider4change:function(e){
-    if(this.data.length != e.detail.value){
+  slider4change: function (e) {
+    if (this.data.length != e.detail.value) {
       var list = Array.apply(null, { length: e.detail.value })
       for (var i = 0; i < e.detail.value; i++) {
         list[i] = this.data.pkp[i]
@@ -141,7 +229,7 @@ Page({
         ipk: list,
         length: e.detail.value
       })
-    }    
+    }
   },
 
   /**

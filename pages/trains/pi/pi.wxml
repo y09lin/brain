@@ -1,17 +1,17 @@
 <!--pages/trains/pi/pi.wxml-->
 <view class='container'>
   <text>输入圆周率小数点后的数字</text>
-  <view style='height:600rpx'>
-    <rich-text nodes='{{writePi}}' />
+  <view style='60px'>
+    <rich-text nodes='{{writePi}}'/>
   </view>
   <text>{{"请输入第 "+(writeStr.length+1)+" 位"}}</text>
   <view class='row-btn'>
-    <block wx:for='{{btnMsg1}}'>
+    <block wx:for='{{btnMsg1}}' wx:key='{{item}}'>
       <button id='{{item}}' bindtap='clickBtn' style='margin-left:4px;margin-right:4px'>{{item}}</button>
     </block>
   </view>
   <view class='row-btn'>
-    <block wx:for='{{btnMsg2}}'>
+    <block wx:for='{{btnMsg2}}' wx:key='{{item}}'>
       <button id='{{item}}' bindtap='clickBtn' style='margin-left:4px;margin-right:4px'>{{item}}</button>
     </block>
   </view>

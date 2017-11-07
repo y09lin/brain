@@ -12,24 +12,41 @@
     </block>
   </scroll-view>
 
-  <scroll-view wx:if='{{state==2}}' class='scroll-view_H' scroll-x="true" style="width: 100%">
+  <!-- <scroll-view wx:if='{{state==2}}' class='scroll-view_H' scroll-x="true" style="width: 100%">
     <block wx:for="{{cpk}}" wx:key="{{item}}">
       <image class='scroll-view-item_H' src='{{item}}' id='{{item}}' bindtap='clickPkp' />
+    </block>
+  </scroll-view> -->
+
+  <scroll-view wx:if='{{state==2}}' class='scroll-view_H' scroll-x="true" style="width: 100%">
+    <block wx:for="{{ipk}}" wx:key="{{item}}" wx:for-index="i">
+      <view class='content-pkp'>
+        <image class='conitem' src='{{item}}' id='{{i}}' bindtap='addOrChangePkp' />
+        <view class='context-red' id='{{i}}' bindtap='addOrChangePkp'>{{i+1}}</view>
+      </view>
+    </block>
+  </scroll-view>
+  <scroll-view wx:if='{{state==2}}' class='scroll-view_H' scroll-x="true" style="width: 100%">
+    <block wx:for="{{cpk}}" wx:key="{{item}}" wx:for-index="i">
+      <view class='content-pkp'>
+        <image class='conitem' src='{{item}}' id='{{i}}' bindtap='actPkp' />
+        <view class='context' id='{{i}}' bindtap='actTxt'>{{i+1}}</view>
+      </view>
     </block>
   </scroll-view>
 
   <scroll-view wx:if="{{state==3}}" class='scroll-view_H' scroll-x="true" style="width: 100%">
     <block wx:for="{{ipk}}" wx:key="{{item}}" wx:for-index="i">
       <view class='content'>
-        <image class='conitem' src='{{cpk[i]}}' />
         <image class='conitem' src='{{rpk[i]}}' />
+        <image class='conitem' src='{{cpk[i]}}' />
       </view>
     </block>
   </scroll-view>
 
   <button bindtap='clickBtn'>{{btnMsg[state]}}</button>
   <view wx:if='{{state==0}}'>挑战多少张扑克牌</view>
-  <slider wx:if='{{state==0}}' bindchange="slider4change" min="12" max="54" value='{{length}}' show-value style='width: 400rpx'/>
+  <slider wx:if='{{state==0}}' bindchange="slider4change" min="12" max="54" value='{{length}}' show-value style='width: 400rpx' />
   <view wx:if='{{state>=2}}'>{{"用时："+useTime}}</view>
   <view wx:if='{{state>=2}}'>{{state==3 ? "一共 "+length+" 张牌，记错了 "+errorCount+" 个。" : "点击某张扑克牌将其后移进行排序"}}</view>
 

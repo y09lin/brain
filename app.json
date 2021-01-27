@@ -6,7 +6,8 @@
     "pages/trains/pkp/rememberpk",
     "pages/test/test",
     "pages/trains/pi/pi",
-    "pages/trains/eword/setting"
+    "pages/trains/eword/setting",
+    "pages/trains/digit/game/digitList"
   ],
   "window": {
     "backgroundTextStyle": "light",

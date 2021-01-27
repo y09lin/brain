@@ -1,0 +1,3 @@
+<!--pages/trains/eword/setting.wxml-->
+<text>服务器地址：</text>
+<input></input>

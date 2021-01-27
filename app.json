@@ -5,12 +5,14 @@
     "pages/trains/index/list",
     "pages/trains/pkp/rememberpk",
     "pages/test/test",
-    "pages/trains/pi/pi"
+    "pages/trains/pi/pi",
+    "pages/trains/eword/setting"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#cce8cf",
     "navigationBarTitleText": "Training",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

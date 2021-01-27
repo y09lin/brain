@@ -10,12 +10,19 @@ Page({
       name: '记忆扑克牌',
       path: '../pkp/rememberpk',
       img: '../pkp/res/pkp_item.png'
-    }, {
-      id: 'pi',
-      name: '挑战圆周率',
-      path: '../pi/pi',
-      img: '../pkp/res/pkp_item.png'
-    }]
+    },{
+      id:'eword',
+      name:'单词',
+      path:'../eword/setting',
+      img:'../pkp/res/pkp_item.png'
+    }
+    // {
+    //   id: 'pi',
+    //   name: '挑战圆周率',
+    //   path: '../pi/pi',
+    //   img: '../pkp/res/pkp_item.png'
+    // }
+    ]
   },
 
   /**

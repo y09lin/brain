@@ -1,18 +1,51 @@
 // pages/trains/digit/game/digitList.js
+const util = require('../../../../utils/util');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    count: 4,
+    list: Array,
+    num: 0,
+    current: '',
+    index: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // TODO get count
 
+    let digits = util.getRandomDigits(this.data.count);
+    this.setData({
+      list: digits
+    })
+  },
+
+  /**
+   * when click begin 2 show digits
+   */
+  onBeginDigits: function(e) {
+    this.setData({
+      index: 0
+    });
+    var timer = setInterval(
+      function(){
+        if (index < count){
+          this.setData({
+            current: this.data.list[index],
+            index: this.data.index + 1
+          });
+        } else {
+          clearInterval(timer);
+        }
+      }, 
+      1500
+    );
   },
 
   /**

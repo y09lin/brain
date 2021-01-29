@@ -14,6 +14,15 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const getRandomDigits = n => {
+  var digits = new Array();
+  for (i=0; i<n; i++){
+    digits[i] = Math.floor(Math.random()*10);
+  }
+  return digits;
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  getRandomDigits: getRandomDigits
 }

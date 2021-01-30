@@ -12,7 +12,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#cce8cf",
-    "navigationBarTitleText": "Training",
+    "navigationBarTitleText": "训练记忆",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json"

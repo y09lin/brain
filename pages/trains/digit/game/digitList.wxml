@@ -1,7 +1,7 @@
 <!--pages/trains/digit/game/digitList.wxml-->
 
 <!-- hidden="{{btnIndex >= 2}}" -->
-<view class="text-center">{{current}}</view>
+<view class="text-center" style="font-size: {{fontSize}}">{{current}}</view>
 
 <view class="margin-lr">
   <text>数字长度 {{count}}</text>

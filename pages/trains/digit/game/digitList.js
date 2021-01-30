@@ -1,6 +1,8 @@
 // pages/trains/digit/game/digitList.js
 const util = require('../../../../utils/util');
-const answerHidden = 'visibility: hidden'
+const answerHidden = 'visibility: hidden';
+const fs22 = '22px';
+const fs35 = '35px'
 
 Page({
 
@@ -18,7 +20,8 @@ Page({
     btnHidden: false,
     inputValue: '',
     winTime: 0,
-    ansStyle: 'visibility: hidden'    
+    ansStyle: 'visibility: hidden',
+    fontSize: fs22
   },
 
   /**
@@ -26,9 +29,7 @@ Page({
    */
   onLoad: function (options) {
     // TODO get count from db
-
     let digits = util.getRandomDigits(this.data.count);
-    console.log(digits);
     this.setData({
       list: digits
     })
@@ -43,12 +44,12 @@ Page({
     this.setData({
       current: '',
       index: i,
-      btnHidden: true
+      btnHidden: true,
+      fontSize: fs35
     });
     var that = this;
     var timer = setInterval(
-      function () {
-        console.log('current: ', that.data.current);
+      function () {        
         var msg = that.data.list[that.data.index];
         if (i % 2 != 0) {
           msg = '';
@@ -66,16 +67,16 @@ Page({
           that.setData({
             current: 'Over!',
             btnIndex: 1,
-            btnHidden: false
+            btnHidden: false,
+            fontSize: fs22
           })
         }
       },
-      1500
+      1000
     );
   },
 
-  onClickBtn: function (e) {
-    console.log('click btn: ', this.data.btnIndex)
+  onClickBtn: function (e) {    
     switch (this.data.btnIndex) {
       case 0:
         // begin 2 show digits
@@ -100,19 +101,24 @@ Page({
   },
 
   moreGame: function(){
-    var count = this.data.count;    
-    if (this.data.winTime == 3){
-      count++
+    var count = this.data.count;
+    var wt = this.data.winTime;
+    if (wt == 3){
+      count++;
+      wt=0;
     }
-    if (this.data.current === 'Faild!' && count > 4){
+    
+    if (this.data.current == 'Faild!' && count > 4){      
       count--
+      wt=0;
     }
     let digits = util.getRandomDigits(count);
-    console.log(digits);
+    
     this.setData({
       count: count,
       list: digits,
       current: 'Ready?',
+      winTime: wt,
       inputValue: '',
       btnIndex: 0,
       ansStyle: answerHidden
@@ -127,7 +133,8 @@ Page({
           current: 'Faild!',
           winTime: 0,
           ansStyle: '',
-          btnIndex: 3
+          btnIndex: 3,
+          fontSize: fs22
         });
         return;
       }
@@ -136,7 +143,8 @@ Page({
       current: 'Win!',
       winTime: this.data.winTime + 1,
       ansStyle: '',
-      btnIndex: 3
+      btnIndex: 3,
+      fontSize: fs22
     });
   },
 

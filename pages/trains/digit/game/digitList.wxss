@@ -1,4 +1,7 @@
 /* pages/trains/digit/game/digitList.wxss */
+
+@import "../../../../libs/weui.wxss";
+
 .text-center{
   width: 100px;
   height: 100px;
@@ -8,4 +11,14 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.margin-lr{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.input-padding-lr{
+  padding-left: 0.50em;
+  padding-right: 0.50em;
 }

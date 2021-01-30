@@ -1,5 +1,6 @@
 // pages/trains/digit/game/digitList.js
 const util = require('../../../../utils/util');
+const answerHidden = 'visibility: hidden'
 
 Page({
 
@@ -12,9 +13,12 @@ Page({
     num: 0,
     current: 'Ready?',
     index: 0,
-    btnText: ['GO!', 'DO!', 'CHECK', 'AGAIN'],
+    btnText: ['GO', 'ANSWER', 'CHECK', 'AGAIN'],
     btnIndex: 0,
-    btnHidden: false
+    btnHidden: false,
+    inputValue: '',
+    winTime: 0,
+    ansStyle: 'visibility: hidden'    
   },
 
   /**
@@ -37,7 +41,9 @@ Page({
     var i = 0;
     var count = this.data.count * 2;
     this.setData({
-      index: i
+      current: '',
+      index: i,
+      btnHidden: true
     });
     var that = this;
     var timer = setInterval(
@@ -57,12 +63,9 @@ Page({
           i++;
         } else {
           clearInterval(timer);
-          let actionIndex = that.data.btnIndex + 1;
-          if (actionIndex == 4) {
-            actionIndex = 0;
-          }
           that.setData({
-            btnIndex: actionIndex,
+            current: 'Over!',
+            btnIndex: 1,
             btnHidden: false
           })
         }
@@ -80,16 +83,68 @@ Page({
         break;
       case 1:
         // begin 2 input
+        this.setData({
+          btnIndex: 2,
+          btnHidden: true  
+        })
         break;
       case 2:
         // begin 2 check
+        this.checkInput()
         break;
       case 3:
         // one more game
+        this.moreGame()
         break;
     }
+  },
+
+  moreGame: function(){
+    var count = this.data.count;    
+    if (this.data.winTime == 3){
+      count++
+    }
+    if (this.data.current === 'Faild!' && count > 4){
+      count--
+    }
+    let digits = util.getRandomDigits(count);
+    console.log(digits);
     this.setData({
-      btnHidden: true
+      count: count,
+      list: digits,
+      current: 'Ready?',
+      inputValue: '',
+      btnIndex: 0,
+      ansStyle: answerHidden
+    })
+  },
+
+  checkInput: function(){
+    var inputList = this.data.inputValue.split('');
+    for (var i=0; i<inputList.length; i++){
+      if (inputList[i] != this.data.list[i]){
+        this.setData({
+          current: 'Faild!',
+          winTime: 0,
+          ansStyle: '',
+          btnIndex: 3
+        });
+        return;
+      }
+    }
+    this.setData({
+      current: 'Win!',
+      winTime: this.data.winTime + 1,
+      ansStyle: '',
+      btnIndex: 3
+    });
+  },
+
+  bindKeyInput: function (e) {
+    var showBtn = e.detail.value.length == this.data.count;
+    this.setData({
+      inputValue: e.detail.value,
+      btnHidden: !showBtn
     })
   },
 

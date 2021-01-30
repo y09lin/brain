@@ -1,6 +1,21 @@
 <!--pages/trains/digit/game/digitList.wxml-->
-<!-- show digits -->
-  
+
+<!-- hidden="{{btnIndex >= 2}}" -->
 <view class="text-center">{{current}}</view>
+
+<view class="margin-lr">
+  <text>数字长度 {{count}}</text>
+  <view class="weui-cells">
+    <view class="weui-input input-padding-lr" 
+      style="{{ansStyle}}">{{list}}</view>
+  </view>
+</view>
+
+<view class="weui-cells margin-lr">
+  <input class="weui-input input-padding-lr"
+    maxlength="{{count}}" type="number" disabled="{{btnIndex != 2}}"
+    bindinput="bindKeyInput" placeholder="按顺序输入数字" value="{{inputValue}}"/>
+</view>
+
 <button type="primary" bindtap="onClickBtn" style="margin: 10px" 
   hidden="{{btnHidden}}">{{btnText[btnIndex]}}</button>

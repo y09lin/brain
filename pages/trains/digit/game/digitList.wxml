@@ -1,2 +1,6 @@
 <!--pages/trains/digit/game/digitList.wxml-->
-<text>pages/trains/digit/game/digitList.wxml</text>
+<!-- show digits -->
+  
+<view class="text-center">{{current}}</view>
+<button type="primary" bindtap="onClickBtn" style="margin: 10px" 
+  hidden="{{btnHidden}}">{{btnText[btnIndex]}}</button>

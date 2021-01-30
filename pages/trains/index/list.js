@@ -14,7 +14,7 @@ Page({
       },
       {
         id: 'digits',
-        name: '',
+        name: '最长数字',
         path: '../digit/game/digitList',
         img: '../pkp/res/pkp_item.png'
       }

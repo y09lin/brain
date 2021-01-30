@@ -16,7 +16,7 @@ const formatNumber = n => {
 
 const getRandomDigits = n => {
   var digits = new Array();
-  for (i=0; i<n; i++){
+  for (var i=0; i<n; i++){
     digits[i] = Math.floor(Math.random()*10);
   }
   return digits;

@@ -25,6 +25,7 @@
       "disablePlugins": [],
       "outputPath": ""
     },
+    "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
@@ -32,7 +33,6 @@
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
-    "bundle": false,
     "useApiHostProcess": true
   },
   "compileType": "miniprogram",

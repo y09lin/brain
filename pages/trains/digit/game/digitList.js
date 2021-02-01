@@ -49,7 +49,7 @@ Page({
     });
     var that = this;
     var timer = setInterval(
-      function () {        
+      function () {
         var msg = that.data.list[that.data.index];
         if (i % 2 != 0) {
           msg = '';
@@ -76,7 +76,7 @@ Page({
     );
   },
 
-  onClickBtn: function (e) {    
+  onClickBtn: function (e) {
     switch (this.data.btnIndex) {
       case 0:
         // begin 2 show digits
@@ -86,7 +86,7 @@ Page({
         // begin 2 input
         this.setData({
           btnIndex: 2,
-          btnHidden: true  
+          btnHidden: true
         })
         break;
       case 2:
@@ -107,13 +107,13 @@ Page({
       count++;
       wt=0;
     }
-    
-    if (this.data.current == 'Faild!' && count > 4){      
+
+    if (this.data.current == 'Faild!' && count > 4){
       count--
       wt=0;
     }
     let digits = util.getRandomDigits(count);
-    
+
     this.setData({
       count: count,
       list: digits,

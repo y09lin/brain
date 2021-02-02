@@ -48,7 +48,17 @@ Page({
         }
       })
     }
+
+    // call cloud function login 2 get openId    
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {}
+    }).then(res=>{
+      console.log('[cloud function]', res)
+      app.globalData.openid = res.result.openid
+    }).catch(console.error)
   },
+  
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo

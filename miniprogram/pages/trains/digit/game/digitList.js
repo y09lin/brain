@@ -4,12 +4,14 @@ const answerHidden = 'visibility: hidden';
 const fs22 = '22px';
 const fs35 = '35px'
 
+const app = getApp();
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
+    _id: '',
+    maxCount: 0,
+    maxTime: '',
     count: 4,
     list: Array,
     num: 0,
@@ -21,7 +23,8 @@ Page({
     inputValue: '',
     winTime: 0,
     ansStyle: 'visibility: hidden',
-    fontSize: fs22
+    fontSize: fs22,
+    oid: ''
   },
 
   /**
@@ -29,10 +32,97 @@ Page({
    */
   onLoad: function (options) {
     // TODO get count from db
-    let digits = util.getRandomDigits(this.data.count);
+    let res = this.queryCount()
+    console.log('init',res)
+    let digits = util.getRandomDigits(res.curCount);
     this.setData({
-      list: digits
+      list: digits,
+      count: res.curCount,
+      maxCount: res.maxCount,
+      maxTime: res.maxTime,
+      _id: res._id,
+      oid: app.globalData.openid      
     })
+  },
+
+  queryCount: function(){
+    var curCount = this.data.count
+    var maxCount = this.data.maxCount;
+    var maxTime = this.data.maxTime;
+    var _id = this.data._id;
+
+    const db = wx.cloud.database();    
+    db.collection('brain_digits').where({
+      _openid: app.globalData.openid
+    }).get({
+      success: res=>{
+        console.log('queryCount', res)
+        curCount = res.digit.curCount
+        maxCount = res.digit.maxCount
+        maxTime = res.digit.maxTime
+        _id = res._id
+      },
+      fail: err=>{
+        console.error('queryCount', err)
+      }
+    })
+    return {
+      curCount: curCount,
+      maxCount: maxCount,
+      maxTime: maxTime,
+      _id: _id
+    }
+  },
+
+  saveCount: function(){
+    console.log('saveCount')
+    const db = wx.cloud.database();
+    db.collection('brain_digits').add({
+      data: this.digitData(),
+      success: res=>{
+        console.log(res)
+      },
+      fail: err=>{
+        console.error(err)
+      }
+    })
+  },
+
+  updateCount: function(){
+    const db = wx.cloud.database();
+    db.collection('brain_digits').doc(this.data._id).update({
+      data: this.digitData(),
+      success: res=>{
+        console.log(res)
+        this.setData({
+          maxCount: countData.digit.maxCount,
+          maxTime: countData.digit.maxTime
+        })
+      },
+      fail: err=>{
+        console.error(err)
+      }
+    })
+  },
+
+  digitData: function(){
+    var mc = this.data.maxCount;
+    var mt = this.data.maxTime;
+    if (this.data.count > this.data.maxCount){
+      mc = this.data.count;
+      mt = new Date();
+    }
+    return {
+      user: {
+        nickName: app.globalData.userInfo.nickName,
+        avatarUrl: app.globalData.userInfo.avatarUrl
+      },
+      digit: {
+        curCount: this.data.count,
+        maxCount: mc,
+        maxTime: mt
+      }
+    }
   },
 
   /**
@@ -174,14 +264,17 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    if (this.data.maxTime == 0){
+      this.saveCount()
+    }else {
+      this.updateCount()
+    }
   },
 
   /**

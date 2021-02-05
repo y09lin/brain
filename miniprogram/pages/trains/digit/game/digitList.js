@@ -31,9 +31,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // TODO get count from db
-    let res = this.queryCount()
-    console.log('init',res)
+    this.queryCount()    
+  },
+
+  initDigits: function(res){
     let digits = util.getRandomDigits(res.curCount);
     this.setData({
       list: digits,
@@ -41,7 +42,7 @@ Page({
       maxCount: res.maxCount,
       maxTime: res.maxTime,
       _id: res._id,
-      oid: app.globalData.openid      
+      oid: app.globalData.openid
     })
   },
 
@@ -51,27 +52,39 @@ Page({
     var maxTime = this.data.maxTime;
     var _id = this.data._id;
 
-    const db = wx.cloud.database();    
+    const db = wx.cloud.database();
     db.collection('brain_digits').where({
       _openid: app.globalData.openid
     }).get({
       success: res=>{
         console.log('queryCount', res)
-        curCount = res.digit.curCount
-        maxCount = res.digit.maxCount
-        maxTime = res.digit.maxTime
-        _id = res._id
+        if (res && res.data.length > 1){
+          curCount = res.data[0].digit.curCount
+          maxCount = res.data[0].digit.maxCount
+          maxTime = res.data[0].digit.maxTime
+          _id = res.data[0]._id
+        }
+        this.initDigits(
+          {
+            curCount: curCount,
+            maxCount: maxCount,
+            maxTime: maxTime,
+            _id: _id
+          }
+        )
       },
       fail: err=>{
         console.error('queryCount', err)
+        this.initDigits(
+          {
+            curCount: curCount,
+            maxCount: maxCount,
+            maxTime: maxTime,
+            _id: _id
+          }
+        )
       }
     })
-    return {
-      curCount: curCount,
-      maxCount: maxCount,
-      maxTime: maxTime,
-      _id: _id
-    }
   },
 
   saveCount: function(){
